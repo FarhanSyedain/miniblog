@@ -1,0 +1,26 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">
+<style>
+	body{
+		background: #FFF;
+	}
+	#div_id_tags > div{
+		max-height: 100px;
+		overflow-y: scroll;
+		border:1px solid #888;
+		padding: 5px;
+		border-radius: 5px;
+	}
+</style>
+<div class="container p-4">
+	
+	<form action="" method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{form.media}}
+		{{form|crispy}}
+		<input class="text-center btn btn-primary" type="submit" value="Submit Post">
+	</form>
+</div>
+
+
