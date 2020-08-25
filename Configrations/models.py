@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 
+
 class Staff(models.Model):
     username = models.CharField(max_length=50,null=True)
     user = models.OneToOneField(User,on_delete=models.CASCADE,null=True)
@@ -48,6 +49,8 @@ class Post(models.Model):
     catogory = models.CharField(max_length=40,null=True)
     sub_title = models.CharField(max_length=100,null=True)
     active = models.BooleanField(default=False) #If true, then dont show the post
+    show_thumbnail = models.BooleanField(default=False)
+    
     
     def save(self):
     
@@ -73,6 +76,17 @@ class Post(models.Model):
         
     def __str__(self):
         return str(self.title + ' by ' + self.author.get_name)
+        
+        
+    @property  
+    def has_tags(self):
+        return len(list(self.tags.all())) > 0
+    
+    
+    @property
+    def get_tags(self):
+        return self.tags.all()
+        
         
 
 #All The models that we want to register in admin page.so we can edit them their

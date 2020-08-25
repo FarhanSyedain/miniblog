@@ -33,7 +33,7 @@
             $("#loader").fadeOut("slow", function() {
                 // will fade out the whole DIV that covers the website.
                 $("#preloader").delay(300).fadeOut("slow");
-                if (__page__ == 'home' || __page__ == 'search' || __page__ == 'category'){
+                if (__page__ == 'home' || __page__ == 'search' || __page__ == 'category' || __page__ == 'tag'){
                     load_posts();
                 }
             }); 

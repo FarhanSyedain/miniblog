@@ -23,7 +23,6 @@ def home(request):
 class HomePageAPIView(ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerilizer
-    permission_classes = [IsAuthenticated,]
     pagination_class = CustomPagination
 
     

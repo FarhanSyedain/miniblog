@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 2
+    'PAGE_SIZE': 8
 }
 
 # Database
@@ -144,3 +144,13 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/media')
+
+
+#Designed to fit for gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'the email you want to send mail from'
+EMAIL_HOST_PASSWORD = 'password'
+#Turn mail from less scure apps 'on' -- by default its off.

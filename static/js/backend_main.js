@@ -1,4 +1,4 @@
-if (__page__ == 'home' || __page__ == 'category'){
+if (__page__ == 'home' || __page__ == 'category' || __page__ == 'tag' ){
 
 var first = true
 var current_page = 1
@@ -8,8 +8,15 @@ var pagination_data = {}
 if (__page__ == 'home'){
     var url = 'api/home/'
 }else{
-    var url = '../api/category/' + category
+    if ( __page__ == 'tag'){
+
+        var url = '../../api/tag/' + tag
+
+    }else{
+        var url = '../api/category/' + category
+    }
 }
+
 
 function getCookie(name) {
     var cookieValue = null;
@@ -53,7 +60,11 @@ function load_posts(){
         if (first){
             first = false
             if (data['results'].length == 0){
-                document.getElementById('main___').innerHTML += ('<p>No Posts</p>')
+
+                if (__page__ == 'tag'){
+                    document.getElementById('main___').innerHTML += ('<h1>No Post With this tag</h1>')
+                }
+            
             }
         }
 
@@ -65,7 +76,16 @@ function load_posts(){
             post_posted = post['posted'].split('T')[0]
             post_img = post['thumbnail']
 
-            item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="single-standard.html" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="category.html">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="single-standard.html">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+            if (__page__ == 'home'){
+                item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="view_blog/'+post_slug +'" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="category/'+post_cat +'">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="view_blog/'+post_slug +'">'+ post_slug +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+            }else{
+                if (__page__ == 'tag'){
+                    item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="../../view_blog/'+post_slug +'" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="../../view_blog/'+post_cat +'">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="../../view_blog/'+post_slug +'">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+                }else{
+                    item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="../view_blog/'+post_slug +'" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="../view_blog/'+post_cat +'">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="../view_blog/'+post_slug +'">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+                }
+            }
+
             div_.innerHTML += item
 
         }
@@ -116,8 +136,16 @@ function shift_page(page){
                 post_cat = post['catogory']
                 post_posted = post['posted'].split('T')[0]
                 post_img = post['thumbnail']
-    
-                item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="single-standard.html" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="category.html">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="single-standard.html">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+                
+                if (__page__ == 'home'){
+                    item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="view_blog/'+post_slug +'" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="category/'+post_cat +'">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="view_blog/'+post_slug +'">'+ post_slug +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+                }else{
+                    if (__page__ == 'tag'){
+                        item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="../../view_blog/'+post_slug +'" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="../../view_blog/'+post_cat +'">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="../../view_blog/'+post_slug +'">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+                    }else{
+                        item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="../view_blog/'+post_slug +'" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="../view_blog/'+post_cat +'">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="../view_blog/'+post_slug +'">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+                    }
+                }
                 div_.innerHTML += item
     
             }

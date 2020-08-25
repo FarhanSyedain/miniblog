@@ -63,7 +63,7 @@ if (__page__ == 'search'){
                 post_posted = post['posted'].split('T')[0]
                 post_img = post['thumbnail']
     
-                item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="single-standard.html" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="category.html">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="single-standard.html">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+                item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="../view_blog/'+ post_slug +'" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a  href="../category/'+ post_cat +'">'+ post_cat +'</a></div><h1 class="item-entry__title"><a  href="../view_blog/'+ post_slug +'">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
                 div_.innerHTML += item
     
             }
@@ -104,8 +104,7 @@ if (__page__ == 'search'){
                 post_cat = post['catogory']
                 post_posted = post['posted'].split('T')[0]
                 post_img = post['thumbnail']
-
-                item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="single-standard.html" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a href="category.html">'+ post_cat +'</a></div><h1 class="item-entry__title"><a href="single-standard.html">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
+                item = ('<article class="col-block"><div class="item-entry" data-aos="zoom-in"><div class="item-entry__thumb"><a href="../view_blog/'+ post_slug +'" class="item-entry__thumb-link"><img src="' + post_img + '" alt=""></a></div><div class="item-entry__text"><div class="item-entry__cat"><a  href="../category/'+ post_cat +'">'+ post_cat +'</a></div><h1 class="item-entry__title"><a  href="../view_blog/'+ post_slug +'">'+ post_title +'</a></h1><div class="item-entry__date"><a href="single-standard.html">'+ post_posted +'</a></div></div></div></article>')
                 div_.innerHTML += item
 
             }
