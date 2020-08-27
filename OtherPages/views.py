@@ -12,10 +12,6 @@ from Configrations.forms import PostCreationForm
 
 from rest_framework.filters import SearchFilter,OrderingFilter
 from rest_framework.generics import ListAPIView
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.decorators import api_view 
-from rest_framework.response import Response
 
 
 #For the catogory page 
@@ -63,7 +59,6 @@ def category(request,category):
 
 
 def blog_detail(request,blog):
-    
     if Staff.objects.filter(user=request.user).exists:
         post = get_object_or_404(Post,slug=blog)
         if (post.active and str(post.author) == str(request.user.staff)) or not post.active:
@@ -77,6 +72,8 @@ def blog_detail(request,blog):
     if request.user.is_authenticated and Staff.objects.filter(user=request.user).exists():
         owner = post.author == request.user.staff
     
+    post.visitors = post.visitors + 1 #Post got one more view
+    
     return render(request,'single-standard.html',{'popular_posts':popular_posts,'post':post,'owner':owner})
 
 
@@ -84,7 +81,7 @@ def blog_detail(request,blog):
 def upload_post(request):
     
     try:
-       assert Staff.objects.filter(user=request.user).exists()
+        assert Staff.objects.filter(user=request.user).exists()
     except AssertionError:
         return redirect('home_page')
     
