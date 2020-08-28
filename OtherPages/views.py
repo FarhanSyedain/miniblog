@@ -73,6 +73,7 @@ def blog_detail(request,blog):
         owner = post.author == request.user.staff
     
     post.visitors = post.visitors + 1 #Post got one more view
+    post.save() 
     
     return render(request,'single-standard.html',{'popular_posts':popular_posts,'post':post,'owner':owner})
 
